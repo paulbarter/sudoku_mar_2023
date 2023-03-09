@@ -55,26 +55,48 @@ def get_col(col_num):
         start_count += 9
     return col
 
+def get_filled_in_block(block_num):
+    block = []
+    if block_num == 1:
+        block = get_filled_in_row(1)[:3] + get_filled_in_row(2)[:3] + get_filled_in_row(3)[:3]
+    elif block_num == 2:
+        block = get_filled_in_row(1)[3:6] + get_filled_in_row(2)[3:6] + get_filled_in_row(3)[3:6]
+    elif block_num == 3:
+        block = get_filled_in_row(1)[6:9] + get_filled_in_row(2)[6:9] + get_filled_in_row(3)[6:9]
+    elif block_num == 4:
+        block = get_filled_in_row(4)[:3] + get_filled_in_row(5)[:3] + get_filled_in_row(6)[:3]
+    elif block_num == 5:
+        block = get_filled_in_row(4)[3:6] + get_filled_in_row(5)[3:6] + get_filled_in_row(6)[3:6]
+    elif block_num == 6:
+        block = get_filled_in_row(4)[6:9] + get_filled_in_row(5)[6:9] + get_filled_in_row(6)[6:9]
+    elif block_num == 7:
+        block = get_filled_in_row(7)[:3] + get_filled_in_row(8)[:3] + get_filled_in_row(9)[:3]
+    elif block_num == 8:
+        block = get_filled_in_row(7)[3:6] + get_filled_in_row(8)[3:6] + get_filled_in_row(9)[3:6]
+    elif block_num == 9:
+        block = get_filled_in_row(7)[6:9] + get_filled_in_row(8)[6:9] + get_filled_in_row(9)[6:9]
+    return block
+
 def get_block(block_num):
     block = []
     if block_num == 1:
-        block = [get_row(1)[:3], get_row(2)[:3], get_row(3)[:3]]
+        block = get_row(1)[:3] + get_row(2)[:3] + get_row(3)[:3]
     elif block_num == 2:
-        block = [get_row(1)[3:6], get_row(2)[3:6], get_row(3)[3:6]]
+        block = get_row(1)[3:6] + get_row(2)[3:6] + get_row(3)[3:6]
     elif block_num == 3:
-        block = [get_row(1)[6:9], get_row(2)[6:9], get_row(3)[6:9]]
+        block = get_row(1)[6:9] + get_row(2)[6:9] + get_row(3)[6:9]
     elif block_num == 4:
-        block = [get_row(4)[:3], get_row(5)[:3], get_row(6)[:3]]
+        block = get_row(4)[:3] + get_row(5)[:3] + get_row(6)[:3]
     elif block_num == 5:
-        block = [get_row(4)[3:6], get_row(5)[3:6], get_row(6)[3:6]]
+        block = get_row(4)[3:6] + get_row(5)[3:6] + get_row(6)[3:6]
     elif block_num == 6:
-        block = [get_row(4)[6:9], get_row(5)[6:9], get_row(6)[6:9]]
+        block = get_row(4)[6:9] + get_row(5)[6:9] + get_row(6)[6:9]
     elif block_num == 7:
-        block = [get_row(7)[:3], get_row(8)[:3], get_row(9)[:3]]
+        block = get_row(7)[:3] + get_row(8)[:3] + get_row(9)[:3]
     elif block_num == 8:
-        block = [get_row(7)[3:6], get_row(8)[3:6], get_row(9)[3:6]]
+        block = get_row(7)[3:6] + get_row(8)[3:6] + get_row(9)[3:6]
     elif block_num == 9:
-        block = [get_row(7)[6:9], get_row(8)[6:9], get_row(9)[6:9]]
+        block = get_row(7)[6:9] + get_row(8)[6:9], get_row(9)[6:9]
     return block
 
 def get_element_ref(row_num, col_num):
@@ -88,18 +110,31 @@ def initialise_board(filled_in_board, board):
             board_array_position_from_row_and_col = ((row - 1) * 9) + col - 1
             initial_board_element = board[board_array_position_from_row_and_col]
             if initial_board_element != '-':
-                filled_in_board[get_element_ref(row, col)].remove(int(initial_board_element))
+                filled_in_board[get_element_ref(row, col)] = set([int(initial_board_element)])
 
 def print_board():
     for row in range(1, 10):
         print(get_row(row))
 
-def print_filled__board():
+def print_filled_board():
     for row in range(1, 10):
         print(get_filled_in_row(row))
 
+def remove_selections(list_of_possibilities, actual_value):
+    # received a list of matrices of possible values, and then removes the actual value
+    for possibilities in list_of_possibilities:
+        if len(possibilities) > 1:
+            if actual_value in possibilities:
+                possibilities.remove(actual_value)
+
 def check_rows(current_board):
-    print('d')
+    for row in range(1, 10):
+        row = get_filled_in_row(row)
+        for elements in row:
+            if len(elements) == 1:
+                remove_selections(row, sorted(elements)[0])
+                # TODO: now update the filled in board with the new row (that has selections removed)
+                continue
 
 def check_cols(current_board):
     print('d')
@@ -112,21 +147,15 @@ def check_win(current_board):
 
 def main(args):
     # print('arg1: {} arg2: {}'.format(args[0], args[1]))
-    # print_board()
-    # print()
-    # print_filled__board()
-    # print()
     initialise_board(filled_in_board, board)
-    # print_filled__board()
-    # print()
-    # win = False
-    # while not win:
-    #     check_rows(filled_in_board)
-    #     check_cols(filled_in_board)
-    #     check_blocks(filled_in_board)
-    #     win = check_win(filled_in_board)
+    win = False
+    while not win:
+        check_rows(filled_in_board)
+        check_cols(filled_in_board)
+        check_blocks(filled_in_board)
+        win = check_win(filled_in_board)
 
-    print_filled__board()
+    print_filled_board()
 
 if __name__ == '__main__':
     main(sys.argv)
