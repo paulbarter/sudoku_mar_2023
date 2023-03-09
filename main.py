@@ -1,26 +1,28 @@
 import sys
 
-board = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3',
-         'A4', 'A5', 'A6', 'B4', 'B5', 'B6', 'C4', 'C5', 'C6',
-         'A7', 'A8', 'A9', 'B7', 'B8', 'B9', 'C7', 'C8', 'C9',
-         'D1', 'D2', 'D3', 'E1', 'E2', 'E3', 'F1', 'F2', 'F3',
-         'D4', 'D5', 'D6', 'E4', 'E5', 'E6', 'F4', 'F5', 'F6',
-         'D7', 'D8', 'D9', 'E7', 'E8', 'E9', 'F7', 'F8', 'F9',
-         'G1', 'G2', 'G3', 'H1', 'H2', 'H3', 'I1', 'I2', 'I3',
-         'G4', 'G5', 'G6', 'H4', 'H5', 'H6', 'I4', 'I5', 'I6',
-         'G7', 'G8', 'G9', 'H7', 'H8', 'H9', 'I7', 'I8', 'I9']
+board = ['-', '-', '-', '2', '6', '-', '7', '-', '1',
+         '6', '8', '-', '-', '7', '-', '-', '9', '-',
+         '1', '9', '-', '-', '-', '4', '5', '-', '-',
+         '8', '2', '-', '1', '-', '-', '-', '4', '-',
+         '-', '-', '4', '6', '-', '2', '9', '-', '-',
+         '-', '5', '-', '-', '-', '3', '-', '2', '8',
+         '-', '-', '9', '3', '-', '-', '-', '7', '4',
+         '-', '4', '-', '-', '5', '-', '-', '3', '6',
+         '7', '-', '3', '-', '1', '8', '-', '-', '-']
 
 filled_in_board = {
-    'A1': [1], 'A2': [], 'A3': [], 'A4': [], 'A5': [], 'A6': [], 'A7': [], 'A8': [], 'A9': [],
-    'B1': [2], 'B2': [], 'B3': [], 'B4': [], 'B5': [], 'B6': [], 'B7': [], 'B8': [], 'B9': [],
-    'C1': [3], 'C2': [], 'C3': [], 'C4': [], 'C5': [], 'C6': [], 'C7': [], 'C8': [], 'C9': [],
-    'D1': [4], 'D2': [], 'D3': [], 'D4': [], 'D5': [], 'D6': [], 'D7': [], 'D8': [], 'D9': [],
-    'E1': [5], 'E2': [], 'E3': [], 'E4': [], 'E5': [], 'E6': [], 'E7': [], 'E8': [], 'E9': [],
-    'F1': [6], 'F2': [], 'F3': [], 'F4': [], 'F5': [], 'F6': [], 'F7': [], 'F8': [], 'F9': [],
-    'G1': [7], 'G2': [], 'G3': [], 'G4': [], 'G5': [], 'G6': [], 'G7': [], 'G8': [], 'G9': [],
-    'H1': [8], 'H2': [], 'H3': [], 'H4': [], 'H5': [], 'H6': [], 'H7': [], 'H8': [], 'H9': [],
-    'I1': [9], 'I2': [], 'I3': [], 'I4': [], 'I5': [], 'I6': [], 'I7': [], 'I8': [], 'I9': []
+    'A1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'A9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'B1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'B9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'C1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'C9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'D1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'D9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'E1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'E9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'F1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'F9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'G1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'G9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'H1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'H9': set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    'I1': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I2': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I3': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I4': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I5': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I6': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I7': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I8': set([1, 2, 3, 4, 5, 6, 7, 8, 9]), 'I9': set([1, 2, 3, 4, 5, 6, 7, 8, 9])
 }
+
+ABCDEFGHI = 'ABCDEFGHI'
 
 def get_row(row_num):
     start_count = (row_num - 1) * 9
@@ -30,14 +32,20 @@ def get_row(row_num):
     return row
 
 def map_row_to_letter(row_num):
-    row_letters = 'ABCDEFGHI'
-    return row_letters[row_num - 1]
+    return ABCDEFGHI[row_num - 1]
 
 def get_filled_in_row(row_num):
     row = []
     for col in range(0, 9):
         row.append(filled_in_board[map_row_to_letter(row_num) + str(col + 1)])
     return row
+
+def get_filled_in_col(col_num):
+    col = []
+    for row in range(0, 9):
+        row_reference = ABCDEFGHI[row] + str(col_num)
+        col.append(filled_in_board[row_reference])
+    return col
 
 def get_col(col_num):
     start_count = col_num - 1
@@ -75,10 +83,12 @@ def get_element_ref(row_num, col_num):
     return rows[row_num - 1] + cols[col_num - 1]
 
 def initialise_board(filled_in_board, board):
-    for row in range(1,9-1):
-        for col in range(1, 9-1):
-            board_array_position_from_row_and_col = ((row - 1) * (col - 1)) + col - 1
-            filled_in_board[get_element_ref(row, col)].append(board[board_array_position_from_row_and_col])
+    for row in range(1, 10):
+        for col in range(1, 10):
+            board_array_position_from_row_and_col = ((row - 1) * 9) + col - 1
+            initial_board_element = board[board_array_position_from_row_and_col]
+            if initial_board_element != '-':
+                filled_in_board[get_element_ref(row, col)].remove(int(initial_board_element))
 
 def print_board():
     for row in range(1, 10):
@@ -88,17 +98,35 @@ def print_filled__board():
     for row in range(1, 10):
         print(get_filled_in_row(row))
 
+def check_rows(current_board):
+    print('d')
+
+def check_cols(current_board):
+    print('d')
+
+def check_blocks(current_board):
+    print('d')
+
+def check_win(current_board):
+    print('d')
+
 def main(args):
     # print('arg1: {} arg2: {}'.format(args[0], args[1]))
-    print_board()
-    print()
-    print_filled__board()
-    print()
+    # print_board()
+    # print()
+    # print_filled__board()
+    # print()
     initialise_board(filled_in_board, board)
-    print_board()
-    print()
+    # print_filled__board()
+    # print()
+    # win = False
+    # while not win:
+    #     check_rows(filled_in_board)
+    #     check_cols(filled_in_board)
+    #     check_blocks(filled_in_board)
+    #     win = check_win(filled_in_board)
+
     print_filled__board()
-    print()
 
 if __name__ == '__main__':
     main(sys.argv)
