@@ -127,33 +127,45 @@ def remove_selections(list_of_possibilities, actual_value):
             if actual_value in possibilities:
                 possibilities.remove(actual_value)
 
-def check_rows(current_board):
+def check_rows():
     for row in range(1, 10):
-        row = get_filled_in_row(row)
-        for elements in row:
+        row_elements = get_filled_in_row(row)
+        for elements in row_elements:
             if len(elements) == 1:
-                remove_selections(row, sorted(elements)[0])
-                # TODO: now update the filled in board with the new row (that has selections removed)
+                remove_selections(row_elements, sorted(elements)[0])
                 continue
 
-def check_cols(current_board):
-    print('d')
+def check_cols():
+    for col in range(1, 10):
+        col_elements = get_filled_in_col(col)
+        for elements in col_elements:
+            if len(elements) == 1:
+                remove_selections(col_elements, sorted(elements)[0])
+                continue
 
-def check_blocks(current_board):
-    print('d')
+def check_blocks():
+    for block in range(1, 10):
+        block_elements = get_filled_in_block(block)
+        for elements in block_elements:
+            if len(elements) == 1:
+                remove_selections(block_elements, sorted(elements)[0])
+                continue
 
-def check_win(current_board):
-    print('d')
+def check_win():
+    for possibilities in filled_in_board.items():
+        if len(possibilities[1]) > 1:
+            return False
+    return True
 
 def main(args):
     # print('arg1: {} arg2: {}'.format(args[0], args[1]))
     initialise_board(filled_in_board, board)
     win = False
     while not win:
-        check_rows(filled_in_board)
-        check_cols(filled_in_board)
-        check_blocks(filled_in_board)
-        win = check_win(filled_in_board)
+        check_rows()
+        check_cols()
+        check_blocks()
+        win = check_win()
 
     print_filled_board()
 
