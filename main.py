@@ -24,13 +24,6 @@ filled_in_board = {
 
 ABCDEFGHI = 'ABCDEFGHI'
 
-def get_row(row_num):
-    start_count = (row_num - 1) * 9
-    row = []
-    for element in range(start_count, start_count + 9):
-        row.append(board[element])
-    return row
-
 def map_row_to_letter(row_num):
     return ABCDEFGHI[row_num - 1]
 
@@ -45,14 +38,6 @@ def get_filled_in_col(col_num):
     for row in range(0, 9):
         row_reference = ABCDEFGHI[row] + str(col_num)
         col.append(filled_in_board[row_reference])
-    return col
-
-def get_col(col_num):
-    start_count = col_num - 1
-    col = []
-    for element in range(0, 9):
-        col.append(board[start_count])
-        start_count += 9
     return col
 
 def get_filled_in_block(block_num):
@@ -77,28 +62,6 @@ def get_filled_in_block(block_num):
         block = get_filled_in_row(7)[6:9] + get_filled_in_row(8)[6:9] + get_filled_in_row(9)[6:9]
     return block
 
-def get_block(block_num):
-    block = []
-    if block_num == 1:
-        block = get_row(1)[:3] + get_row(2)[:3] + get_row(3)[:3]
-    elif block_num == 2:
-        block = get_row(1)[3:6] + get_row(2)[3:6] + get_row(3)[3:6]
-    elif block_num == 3:
-        block = get_row(1)[6:9] + get_row(2)[6:9] + get_row(3)[6:9]
-    elif block_num == 4:
-        block = get_row(4)[:3] + get_row(5)[:3] + get_row(6)[:3]
-    elif block_num == 5:
-        block = get_row(4)[3:6] + get_row(5)[3:6] + get_row(6)[3:6]
-    elif block_num == 6:
-        block = get_row(4)[6:9] + get_row(5)[6:9] + get_row(6)[6:9]
-    elif block_num == 7:
-        block = get_row(7)[:3] + get_row(8)[:3] + get_row(9)[:3]
-    elif block_num == 8:
-        block = get_row(7)[3:6] + get_row(8)[3:6] + get_row(9)[3:6]
-    elif block_num == 9:
-        block = get_row(7)[6:9] + get_row(8)[6:9], get_row(9)[6:9]
-    return block
-
 def get_element_ref(row_num, col_num):
     rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
     cols = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -111,10 +74,6 @@ def initialise_board(filled_in_board, board):
             initial_board_element = board[board_array_position_from_row_and_col]
             if initial_board_element != '-':
                 filled_in_board[get_element_ref(row, col)] = set([int(initial_board_element)])
-
-def print_board():
-    for row in range(1, 10):
-        print(get_row(row))
 
 def print_filled_board():
     for row in range(1, 10):
